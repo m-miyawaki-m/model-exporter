@@ -73,26 +73,23 @@ AGE,EMAIL,NAME
 ### 5.3 JSON 出力フォーマット
 
 ```json
-[
-  {
-    "name": "Tanaka Taro",
-    "email": "tanaka@example.com",
-    "age": 30
-  },
-  {
-    "name": "Suzuki Hanako",
-    "email": "suzuki@example.com",
-    "age": 25
-  },
-  {
-    "name": "Sato Ichiro",
-    "email": "sato@example.com",
-    "age": 35
-  }
-]
+[ {
+  "name" : "Tanaka Taro",
+  "email" : "tanaka@example.com",
+  "age" : 30
+}, {
+  "name" : "Suzuki Hanako",
+  "email" : "suzuki@example.com",
+  "age" : 25
+}, {
+  "name" : "Sato Ichiro",
+  "email" : "sato@example.com",
+  "age" : 35
+} ]
 ```
 
-- インデント付き整形出力（`SerializationFeature.INDENT_OUTPUT` 有効）
+- Jackson `DefaultPrettyPrinter` による整形出力（`SerializationFeature.INDENT_OUTPUT` 有効）
+- コロン前後にスペースあり（` : `）、配列括弧とオブジェクトが同一行に配置
 
 ## 6. カスタマイズ
 

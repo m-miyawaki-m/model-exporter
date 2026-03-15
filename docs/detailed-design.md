@@ -310,7 +310,7 @@ deactivate main
 | ルート要素 | JSON 配列 `[]` |
 | 各要素 | JSON オブジェクト `{}` |
 | キー名 | フィールド名そのまま（camelCase） |
-| インデント | 2スペース（Jackson デフォルト） |
+| インデント | 2スペース（`DefaultPrettyPrinter` による。`INDENT_OUTPUT` 有効時） |
 | 文字コード | UTF-8 |
 
 ## 4. 例外設計
