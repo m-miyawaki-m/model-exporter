@@ -2,9 +2,11 @@ package com.example.exporter;
 
 import com.example.exporter.exporter.CsvExporter;
 import com.example.exporter.exporter.JsonExporter;
+import com.example.exporter.exporter.ScreenActionFlattener;
 import com.example.exporter.model.FunctionClass;
 import com.example.exporter.model.SampleUser;
 import com.example.exporter.model.ScreenAction;
+import com.example.exporter.model.ScreenActionRow;
 import com.example.exporter.model.SqlSession;
 import com.example.exporter.model.TableUsage;
 
@@ -16,6 +18,7 @@ public class Main {
     private static final String OUTPUT_CSV = "output/sample.csv";
     private static final String OUTPUT_JSON = "output/sample.json";
     private static final String OUTPUT_SCREEN_ACTION = "output/screen-action.json";
+    private static final String OUTPUT_SCREEN_ACTION_CSV = "output/screen-action.csv";
 
     public static void main(String[] args) {
         exportSampleUsers();
@@ -101,7 +104,20 @@ public class Main {
             jsonExporter.export(Arrays.asList(screenAction), OUTPUT_SCREEN_ACTION);
             System.out.println("ScreenAction exported: " + OUTPUT_SCREEN_ACTION);
         } catch (Exception e) {
-            System.err.println("ScreenAction export failed: " + e.getMessage());
+            System.err.println("ScreenAction JSON export failed: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        // CSV出力（テーブル単位でフラット化）
+        try {
+            ScreenActionFlattener flattener = new ScreenActionFlattener();
+            List<ScreenActionRow> rows = flattener.flatten(screenAction);
+
+            CsvExporter<ScreenActionRow> csvExporter = new CsvExporter<>();
+            csvExporter.export(rows, OUTPUT_SCREEN_ACTION_CSV);
+            System.out.println("ScreenAction CSV exported: " + OUTPUT_SCREEN_ACTION_CSV);
+        } catch (Exception e) {
+            System.err.println("ScreenAction CSV export failed: " + e.getMessage());
             e.printStackTrace();
         }
     }
